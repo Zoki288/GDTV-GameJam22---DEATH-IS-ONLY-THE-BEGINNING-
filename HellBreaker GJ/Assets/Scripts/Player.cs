@@ -15,8 +15,8 @@ public class Player : MonoBehaviour
          playerControls = new Controls();
         playerControls.Player.Enable();
         playerControls.Player.Shoot.performed += Shoot;
-        playerControls.Player.Shoot.performed += Sword;
-        playerControls.Player.Shoot.performed += Action;
+        playerControls.Player.Sword.performed += Sword;
+        playerControls.Player.Action.performed += Action;
     }
 
     private void FixedUpdate()
