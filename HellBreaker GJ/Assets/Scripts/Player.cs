@@ -15,7 +15,8 @@ public class Player : MonoBehaviour
          playerControls = new Controls();
         playerControls.Player.Enable();
         playerControls.Player.Shoot.performed += Shoot;
-
+        playerControls.Player.Shoot.performed += Sword;
+        playerControls.Player.Shoot.performed += Action;
     }
 
     private void FixedUpdate()
@@ -36,6 +37,22 @@ public class Player : MonoBehaviour
             Debug.Log("We shot!");
         }
         
+    }
+    public void Sword(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("Swish swash!");
+        }
+
+    }
+    public void Action(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("Ayo action!");
+        }
+
     }
     /*
     private void OnEnable()
