@@ -6,32 +6,28 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-
-   
+    [SerializeField] float movement_speed = 5f;
+    Controls playerControls;
     [SerializeField] Rigidbody2D rb;
 
     private void Awake()
     {
-        Controls playerControls = new Controls();
+         playerControls = new Controls();
         playerControls.Player.Enable();
         playerControls.Player.Shoot.performed += Shoot;
-        playerControls.Player.Move.performed += moveContext => Move(moveContext.ReadValue<Vector2>());
-    }
-    
-   
 
-    public void Move(Vector2 moveDirection)
+    }
+
+    private void FixedUpdate()
     {
-        Debug.Log(moveDirection);
-
+        Vector2 input_vector = playerControls.Player.Move.ReadValue<Vector2>();
         Vector3 movement = new Vector3();
-        movement.x = moveDirection.x;
-        movement.y = moveDirection.y;
+        movement.x = input_vector.x;
+        movement.y = input_vector.y;
         movement.z = 0;
-
-        rb.transform.Translate(movement * Time.deltaTime);
-
+        rb.transform.Translate(movement * Time.deltaTime * movement_speed);
     }
+
 
     public void Shoot(InputAction.CallbackContext context)
     {
