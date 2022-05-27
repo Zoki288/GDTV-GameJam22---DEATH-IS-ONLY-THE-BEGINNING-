@@ -7,16 +7,18 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
 
-    public Controls playerControls = new Controls();
+   
     [SerializeField] Rigidbody2D rb;
- /*
-    private void Start()
+
+    private void Awake()
     {
-        playerControls.Player.Shoot.performed += context => Shoot(context);
+        Controls playerControls = new Controls();
+        playerControls.Player.Enable();
+        playerControls.Player.Shoot.performed += Shoot;
         playerControls.Player.Move.performed += moveContext => Move(moveContext.ReadValue<Vector2>());
     }
     
-    */
+   
 
     public void Move(Vector2 moveDirection)
     {
@@ -24,8 +26,8 @@ public class Player : MonoBehaviour
 
         Vector3 movement = new Vector3();
         movement.x = moveDirection.x;
-        movement.y = 0;
-        movement.z = moveDirection.y;
+        movement.y = moveDirection.y;
+        movement.z = 0;
 
         rb.transform.Translate(movement * Time.deltaTime);
 
@@ -33,11 +35,11 @@ public class Player : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        if (!context.performed)
+        if (context.performed)
         {
-            return;
+            Debug.Log("We shot!");
         }
-        Debug.Log("We shot!");
+        
     }
     /*
     private void OnEnable()
