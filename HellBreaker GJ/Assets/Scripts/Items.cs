@@ -11,8 +11,16 @@ public class Items : MonoBehaviour
         [SerializeField] int moneyCost = 0;
     [SerializeField] int playerCash;
     [SerializeField] Controls playerControls;
-    [SerializeField] GameObject walletScript;
+    [SerializeField] GameManager gameManager;
+    [SerializeField] int addAmmo;
+    [SerializeField] int addHealth;
+    [SerializeField] int addDamage;
 
+
+    private void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (moneyCost == 0)
@@ -30,6 +38,9 @@ public class Items : MonoBehaviour
 
     private void PickMeUp()
     {
+        gameManager.ammo += addAmmo;
+        gameManager.health += addHealth;
+        gameManager.damage += addDamage;
         Destroy(this.gameObject);
         
         throw new NotImplementedException();

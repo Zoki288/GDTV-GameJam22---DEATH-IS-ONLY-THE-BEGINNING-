@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(gameObject);
+    }
     // Start is called before the first frame update
     void Start()
     {

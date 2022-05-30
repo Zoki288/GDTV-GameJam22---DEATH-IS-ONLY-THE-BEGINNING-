@@ -1,16 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public int maxHealth = 100;
     public int health = 100;
-    public int time = 100;
+    public float time = 30;
     public int money;
-    public int ammo;
+    public int ammo = 10;
     public int damage = 5;
-
+  
+    [SerializeField] TextMeshProUGUI healthText;
+    [SerializeField] TextMeshProUGUI cashText;
+    [SerializeField] TextMeshProUGUI timeText;
+    //[SerializeField] GameObject playerObject;
     void addMoney(int x) 
     { money += x; }
 
@@ -32,10 +39,26 @@ public class GameManager : MonoBehaviour
     void addAmmo(int x)
     { ammo += x; }
 
-    [SerializeField] GameObject playerObject;
+    
 
 
-        
+    private void Awake()
+    {
+        int gameStatusCount = FindObjectsOfType<GameManager>().Length;
+        if (gameStatusCount > 1)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
+    }
+
+
+
     void Start()
     {
         
@@ -44,13 +67,35 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        { SceneManager.LoadScene(0);
+            Destroy(gameObject);
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 1 )
+        {
+            timeText.text = Mathf.RoundToInt(time).ToString();
+            time -= Time.deltaTime;
+            if (time<=0)
+            {
+                overWorldDeath();
+            }
+        }
+        else
+        {
         
+            timeText.text = "";
+        }
+
+
+
+
     }
+
 
     public void overWorldDeath()
     {
         money = 0;
-       
+        SceneManager.LoadScene(2);
     }
 
     public void underWorldDeath()
@@ -58,10 +103,12 @@ public class GameManager : MonoBehaviour
         maxHealth = 100;
         time = 100;
         ammo = 10;
+        SceneManager.LoadScene(3);
     }
     public void shopLeft()
     {
         money = 0;
         health = maxHealth;
+        SceneManager.LoadScene(1);
     }
 }
