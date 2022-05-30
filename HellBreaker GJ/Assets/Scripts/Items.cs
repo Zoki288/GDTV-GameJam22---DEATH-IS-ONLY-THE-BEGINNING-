@@ -11,6 +11,7 @@ public class Items : MonoBehaviour
         [SerializeField] int moneyCost = 0;
     [SerializeField] int playerCash;
     [SerializeField] Controls playerControls;
+    [SerializeField] GameObject walletScript;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -29,6 +30,8 @@ public class Items : MonoBehaviour
 
     private void PickMeUp()
     {
+        Destroy(this.gameObject);
+        
         throw new NotImplementedException();
     }
 }
