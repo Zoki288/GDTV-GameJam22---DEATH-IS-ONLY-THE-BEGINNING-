@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public int damage = 5;
   
     [SerializeField] TextMeshProUGUI healthText;
-    [SerializeField] TextMeshProUGUI cashText;
+    [SerializeField] TextMeshProUGUI ammoText;
     [SerializeField] TextMeshProUGUI timeText;
     //[SerializeField] GameObject playerObject;
     void addMoney(int x) 
@@ -67,7 +67,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        ammoText.text = "Ammo: " + ammo.ToString();
+        healthText.text = "Health: " + health.ToString();
+        if (Input.GetKeyDown(KeyCode.Escape))
         { SceneManager.LoadScene(0);
             Destroy(gameObject);
         }
@@ -86,7 +88,14 @@ public class GameManager : MonoBehaviour
             timeText.text = "";
         }
 
-
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            if (health <= 0)
+            {
+                underWorldDeath();
+            }
+           
+        }
 
 
     }
@@ -94,7 +103,7 @@ public class GameManager : MonoBehaviour
 
     public void overWorldDeath()
     {
-        money = 0;
+       // money = 0;
         SceneManager.LoadScene(2);
     }
 
@@ -102,12 +111,13 @@ public class GameManager : MonoBehaviour
     {
         maxHealth = 100;
         time = 100;
-        ammo = 10;
-        SceneManager.LoadScene(3);
+        health = maxHealth;
+        //ammo = 10;
+        SceneManager.LoadScene(1);
     }
     public void shopLeft()
     {
-        money = 0;
+       // money = 0;
         health = maxHealth;
         SceneManager.LoadScene(1);
     }
