@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1147744301351092655}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.2, y: 0.30042875, z: -3.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children:
   - {fileID: 7219825845710824656}
   - {fileID: 6663708075511883087}
@@ -101,13 +101,13 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1147744301351092648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +122,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement_speed: 5
   rb: {fileID: 1147744301351092650}
+  gunRotation: {fileID: 1886575121374938068}
+  mainCamera: {fileID: 0}
+  playerSprite: {fileID: 3647032543977502764}
+  gunSprite: {fileID: 2452796623660180531}
 --- !u!61 &1147744301351092651
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -203,13 +207,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2452796623660180531}
-  m_LocalRotation: {x: 0, y: 0, z: -0.258819, w: 0.9659259}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.1, y: 0, z: -4.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6663708075511883087}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3629874264015906413
 SpriteRenderer:
   m_ObjectHideFlags: 0
