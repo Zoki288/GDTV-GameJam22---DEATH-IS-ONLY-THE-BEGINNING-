@@ -17,6 +17,11 @@ public class Player : MonoBehaviour
     Vector3 baseScale;
     [SerializeField] GameObject playerSprite;
     [SerializeField] GameObject gunSprite;
+    [SerializeField] Transform gunShooter;
+    [SerializeField] GameObject playerProjectile;
+    float bulletForce = 20;
+    float bulletDamage = 5;
+
 
     private void Awake()
     {
@@ -72,7 +77,8 @@ public class Player : MonoBehaviour
         movement.y = input_vector.y;
         movement.z = 0;
         rb.transform.Translate(movement * Time.deltaTime * movement_speed);
-
+        //Prevents rigidbody forces (eg. getting hit by a bullet transfers it's force making you move a lil for a while)
+        rb.velocity = Vector3.zero;
     }
 
 
@@ -80,7 +86,10 @@ public class Player : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("We shot!");
+            GameObject bullet = Instantiate(playerProjectile, gunShooter.transform.position, Quaternion.Euler(0, 0, angle));
+            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+            bulletRb.AddForce(gunShooter.right * bulletForce, ForceMode2D.Impulse);
+
         }
         
     }
